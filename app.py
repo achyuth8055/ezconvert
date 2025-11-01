@@ -193,8 +193,38 @@ def process_convert(image: Image.Image, options: Dict, original_ext: str) -> Tup
     elif target_format == "ico":
         size = min(max(image.width, image.height), 256)
         output = image.resize((size, size), Image.LANCZOS)
+    elif target_format == "pdf":
+        # PDF conversion handled separately
+        save_kwargs = {"format": "PDF"}
 
     return output, target_format, {"save_kwargs": save_kwargs, "original_format": original_ext}
+
+
+def convert_image_to_pdf(image: Image.Image, output_path: Path) -> None:
+    """Convert an image to PDF format using ReportLab"""
+    if not PDF_SUPPORTED:
+        raise ValueError("PDF conversion not supported. Install reportlab: pip install reportlab")
+    
+    # Convert to RGB if necessary
+    if image.mode in ('RGBA', 'LA', 'P'):
+        rgb_image = Image.new('RGB', image.size, (255, 255, 255))
+        if image.mode == 'P':
+            image = image.convert('RGBA')
+        rgb_image.paste(image, mask=image.split()[-1] if image.mode in ('RGBA', 'LA') else None)
+        image = rgb_image
+    elif image.mode != 'RGB':
+        image = image.convert('RGB')
+    
+    # Create PDF with image dimensions
+    pdf_canvas = canvas.Canvas(str(output_path), pagesize=(image.width, image.height))
+    
+    # Draw image on PDF
+    img_reader = ImageReader(image)
+    pdf_canvas.drawImage(img_reader, 0, 0, width=image.width, height=image.height)
+    
+    # Save PDF
+    pdf_canvas.save()
+
 
 
 def process_resize(image: Image.Image, options: Dict) -> Tuple[Image.Image, str, Dict]:
@@ -677,6 +707,7 @@ def api_convert():
     width = parse_positive_int(request.form.get("width"))
     height = parse_positive_int(request.form.get("height"))
     keep_aspect = request.form.get("keep_aspect", "true").lower() == "true"
+    rotation = parse_positive_int(request.form.get("rotation")) or 0
     
     # Validate format
     if target_format not in CONVERT_FORMATS:
@@ -710,6 +741,14 @@ def api_convert():
                 # Open image
                 image = Image.open(file_storage.stream)
                 
+                # Apply rotation if specified
+                if rotation and rotation != 0:
+                    # Normalize rotation to 0-359 range
+                    rotation = rotation % 360
+                    if rotation != 0:
+                        # PIL rotates counter-clockwise, so negate for clockwise rotation
+                        image = image.rotate(-rotation, expand=True)
+                
                 # Apply resizing if dimensions provided
                 if width or height:
                     new_width = width or image.width
@@ -726,24 +765,29 @@ def api_convert():
                 
                 # Convert format if needed
                 output = image
-                pil_format = resolve_pil_format(target_format)
-                save_kwargs = {"format": pil_format}
-                
-                if target_format in {"jpg", "jpeg"}:
-                    output = image.convert("RGB")
-                    save_kwargs.update({"quality": quality, "optimize": True})
-                elif target_format == "png":
-                    save_kwargs.update({"optimize": True})
-                elif target_format == "webp":
-                    save_kwargs.update({"quality": quality, "method": 6})
                 
                 # Generate output filename
                 base_name = Path(original_name).stem or "image"
                 output_name = branded_filename(original_name, target_format, used_names)
                 output_path = out_dir / output_name
                 
-                # Save image
-                output.save(output_path, **save_kwargs)
+                # Handle PDF conversion separately
+                if target_format == "pdf":
+                    convert_image_to_pdf(image, output_path)
+                else:
+                    pil_format = resolve_pil_format(target_format)
+                    save_kwargs = {"format": pil_format}
+                    
+                    if target_format in {"jpg", "jpeg"}:
+                        output = image.convert("RGB")
+                        save_kwargs.update({"quality": quality, "optimize": True})
+                    elif target_format == "png":
+                        save_kwargs.update({"optimize": True})
+                    elif target_format == "webp":
+                        save_kwargs.update({"quality": quality, "method": 6})
+                    
+                    # Save image
+                    output.save(output_path, **save_kwargs)
                 
                 # Generate URL
                 file_url = url_for("static", filename=f"out/{output_name}", _external=False)

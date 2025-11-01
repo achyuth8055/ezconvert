@@ -424,7 +424,10 @@ async function handleCrop(scale) {
         formData.append('width', cropWidth);
         formData.append('height', cropHeight);
         
-        // Show loading state
+        // Show loading modal
+        LoadingModal.show('Cropping Image', 'Please wait while we crop your image');
+        LoadingModal.simulateProgress(2000);
+        
         const cropBtn = document.getElementById('cropBtn');
         cropBtn.textContent = 'Cropping...';
         cropBtn.disabled = true;
@@ -441,13 +444,18 @@ async function handleCrop(scale) {
         
         const result = await response.json();
         
+        // Update loading progress
+        LoadingModal.updateProgress(100);
+        LoadingModal.updateMessage('✓ Crop complete!');
+        
         // Download cropped image
         const link = document.createElement('a');
         link.href = result.url;
         link.download = result.filename;
         link.click();
         
-        // Reset button
+        // Hide loading and reset button
+        await LoadingModal.hide();
         cropBtn.textContent = 'Crop →';
         cropBtn.disabled = false;
         
@@ -456,6 +464,7 @@ async function handleCrop(scale) {
         
     } catch (error) {
         console.error('Crop error:', error);
+        await LoadingModal.hide();
         NotificationModal.error('Failed to crop image. Please try again.');
         
         const cropBtn = document.getElementById('cropBtn');

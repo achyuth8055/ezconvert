@@ -324,6 +324,10 @@ async function handleExport() {
         exportBtn.disabled = true;
         exportBtn.textContent = 'Processing...';
 
+        // Show loading modal
+        LoadingModal.show('Resizing Image', 'Please wait while we resize your image');
+        LoadingModal.simulateProgress(2500);
+
         const formData = new FormData();
         formData.append('image', currentImage);
         formData.append('width', targetWidth);
@@ -346,6 +350,10 @@ async function handleExport() {
         const result = await response.json();
         
         if (result.success && result.file) {
+            // Update loading progress
+            LoadingModal.updateProgress(100);
+            LoadingModal.updateMessage('✓ Resize complete!');
+            
             // Download the resized image
             const a = document.createElement('a');
             a.href = result.file;
@@ -353,12 +361,17 @@ async function handleExport() {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
+            
+            // Hide loading after download
+            await LoadingModal.hide();
+            NotificationModal.success('Image resized successfully!');
         } else {
             throw new Error(result.error || 'Resize failed');
         }
 
     } catch (error) {
         console.error('Export error:', error);
+        await LoadingModal.hide();
         NotificationModal.error('Failed to resize image: ' + error.message);
     } finally {
         exportBtn.disabled = false;

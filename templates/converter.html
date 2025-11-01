@@ -4,31 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Free Image Converter Online - PNG to JPG, WebP, HEIC Converter | ImageForge</title>
+    <title>Free Image Converter Online - Convert PNG, JPG, WebP, PDF | ImageForge</title>
     
-    <meta name="description" content="Convert images to any format instantly! PNG to JPG, JPG to PNG, WebP converter, HEIC to JPG. Bulk image conversion, rotate, and quality control. 100% free, no watermarks.">
+    <meta name="description" content="Convert images to any format instantly! PNG to JPG, JPG to PDF, WebP converter, HEIC to JPG. Bulk image conversion, rotate, and quality control. 100% free, fast, and secure.">
     
-    <meta name="keywords" content="image converter, png to jpg, jpg to png, webp to jpg, webp to png, heic to jpg, image format converter, convert png, convert jpg, convert webp, bulk image converter, batch image converter, free image conversion, online image converter, photo converter, picture converter, image transformation">
+    <meta name="keywords" content="image converter, png to jpg, jpg to png, image to pdf, pdf converter, webp to jpg, webp to png, heic to jpg, image format converter, convert png, convert jpg, convert webp, bulk image converter, batch image converter, free image conversion, online image converter, photo converter, picture converter, image to pdf converter">
     
     <link rel="canonical" href="https://www.imageforge.com/converter">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.imageforge.com/converter">
-    <meta property="og:title" content="Free Image Converter - Convert PNG, JPG, WebP | ImageForge">
-    <meta property="og:description" content="Convert images between formats instantly. Supports PNG, JPG, WebP, HEIC and more. Bulk conversion and rotation features.">
+    <meta property="og:title" content="Free Image Converter - Convert PNG, JPG, WebP, PDF | ImageForge">
+    <meta property="og:description" content="Convert images between formats instantly. Supports PNG, JPG, WebP, PDF, HEIC and more. Bulk conversion, rotation, and quality control features.">
     <meta property="og:image" content="https://www.imageforge.com/static/assets/converter-og.png">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://www.imageforge.com/converter">
-    <meta name="twitter:title" content="Free Image Converter - PNG to JPG, WebP Converter">
-    <meta name="twitter:description" content="Convert images between formats instantly. Supports PNG, JPG, WebP, HEIC. Bulk conversion available.">
+    <meta name="twitter:title" content="Free Image Converter - PNG to JPG, PDF Converter">
+    <meta name="twitter:description" content="Convert images between formats instantly. Supports PNG, JPG, WebP, PDF, HEIC. Bulk conversion and quality control.">
     <meta name="twitter:image" content="https://www.imageforge.com/static/assets/converter-twitter.png">
     
     <!-- Additional SEO -->
     <meta name="robots" content="index, follow">
     <meta name="language" content="English">
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ImageForge Image Converter",
+        "description": "Free online image converter supporting PNG, JPG, WebP, PDF, HEIC and more formats",
+        "url": "https://www.imageforge.com/converter",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": "PNG to JPG, JPG to PNG, Image to PDF, WebP conversion, HEIC to JPG, Bulk conversion, Image rotation, Quality control"
+    }
+    </script>
     
     <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/shared_upload.css') }}">
@@ -52,7 +71,7 @@
                         <rect x="3" y="14" width="7" height="7" rx="1" fill="#5b82e6"/>
                         <rect x="14" y="14" width="7" height="7" rx="1" fill="#6ea8fe"/>
                     </svg>
-                    <span class="name" style="text-decoration: none; color: inherit;">EzImage</span>
+                    <span class="name" style="text-decoration: none; color: inherit;">ImageForge</span>
                 </a>
             </div>
             
@@ -133,7 +152,7 @@
             <!-- Hero Section -->
             <section class="hero">
                 <h1 class="title">Image Converter</h1>
-                <p class="subtitle">Easily convert and optimize your images with our fast, free online tool.</p>
+                <p class="subtitle">Convert images to JPG, PNG, WebP, PDF and more. Fast, free, and secure online tool.</p>
             </section>
 
             <!-- Dropzone -->
@@ -270,12 +289,13 @@
                             <option value="bmp">BMP</option>
                             <option value="tiff">TIFF</option>
                             <option value="ico">ICO</option>
+                            <option value="pdf">PDF</option>
                         </select>
                         <svg class="select-icon" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M3 5L6 8L9 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <p class="help-text-editor">Lossy method reduce PNG size at the expense of image quality</p>
+                    <p class="help-text-editor">Convert images to various formats including PDF</p>
                 </div>
 
                 <div class="form-group-editor" id="quality-group">
@@ -359,7 +379,7 @@
                 <span class="footer-separator">•</span>
                 <a href="/request-feature" target="_blank" class="footer-link">Request a Feature</a>
             </div>
-            <p class="footer-text">&copy; 2025 EzImage. All rights reserved.</p>
+            <p class="footer-text">&copy; 2025 ImageForge. All rights reserved.</p>
         </div>
     </footer>
 

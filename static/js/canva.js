@@ -473,6 +473,10 @@
     const o = selected();
     if(!o || o.type!=='image'){ NotificationModal.error('Select an image layer first'); return; }
     try{
+      // Show loading modal
+      LoadingModal.show('Removing Background', 'Processing your image with AI');
+      LoadingModal.simulateProgress(5000);
+      
       status('Removing background…');
       const blob = await fetch(o.src).then(r=>r.blob());
       const fd = new FormData();
@@ -487,9 +491,16 @@
       await new Promise((resolve)=>{ img.onload=resolve; img.src=url; });
       o.img = img; o.src = url;
       draw();
+      
+      // Update loading and hide
+      LoadingModal.updateProgress(100);
+      LoadingModal.updateMessage('✓ Background removed!');
+      await LoadingModal.hide();
+      
       status('Background removed');
       NotificationModal.success('Background removed successfully');
     }catch(e){
+      await LoadingModal.hide();
       NotificationModal.error('Background removal failed'); 
       status('Ready');
     }

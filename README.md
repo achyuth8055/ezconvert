@@ -1,102 +1,261 @@
-# ImageResizer - Professional Image Processing Tool
+# ImageForge - Professional Image Processing Suite
 
-A full-stack web application for resizing, cropping, compressing, and converting images with a modern dark theme UI.
+A full-stack web application for converting, resizing, cropping, compressing images, removing backgrounds, and more with a modern UI.
 
 ## ✨ Features
 
-- **📐 Resize** - By pixels, percentage, or social media presets
-- **✂️ Crop** - Free-form and aspect-ratio cropping with Fabric.js
-- **🗜️ Compress** - Quality-based compression with live preview
-- **🔄 Convert** - Format conversion (PNG, JPG, WebP, GIF, etc.)
-- **☁️ Cloud Upload** - Support for Dropbox, Google Drive, OneDrive
-- **🌐 URL Import** - Load images directly from URLs
-- **📱 Responsive** - Works on desktop and mobile devices
+- **� Convert** - Format conversion (PNG, JPG, WebP, **PDF**, GIF, HEIC, BMP, TIFF, ICO) with rotation
+- **�📐 Resize** - By pixels, percentage, or social media presets
+- **✂️ Crop** - Interactive cropping with aspect ratio presets
+- **🗜️ Compress** - Quality-based compression with before/after comparison slider
+- **🎨 Background Remover** - AI-powered background removal with design editor
+- **📱 QR Generator** - Create QR codes with customization options
+- **🌐 Responsive** - Works perfectly on desktop, tablet, and mobile devices
+- **⚡ Real-time Processing** - Fast image processing with loading animations
+- **� Privacy-Focused** - All processing done locally on your server
 
 ## 🚀 Quick Start
 
-### 1. Install Dependencies
+### Prerequisites
+- Python 3.8 or higher
+- pip (Python package manager)
+- Git
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/achyuth8055/ezconvert.git
+cd ezconvert
+```
+
+### 2. Create Virtual Environment
+
+```bash
+# On macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+
+# On Windows
+python -m venv venv
+venv\Scripts\activate
+```
+
+### 3. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run the Application
+### 4. Run the Application
 
 ```bash
 python app.py
 ```
 
-### 3. Open in Browser
+### 5. Open in Browser
 
 ```
 http://localhost:5004
 ```
 
-## 📋 Current Status
+## � Dependencies
 
-### ✅ Completed
-- **Homepage** - Fully functional with upload dropzone, cloud storage placeholders, URL import
-- **Dark Theme UI** - Professional design matching provided screenshots
-- **File Upload** - Drag & drop, device selection, validation
-- **Backend API** - Image processing endpoints for all operations
-- **Flask Routes** - All tool pages routed correctly
+Core packages installed automatically:
+- **Flask 3.0.3** - Web framework
+- **Pillow 10.3.0** - Image processing
+- **reportlab 4.0.7** - PDF generation
+- **rembg 2.0.50** - AI background removal
+- **qrcode 7.4.2** - QR code generation
+- **Werkzeug 3.0.3** - WSGI utilities
 
-### 🚧 In Progress
-- **Resize Tool UI** - Needs update to match screenshot (3 tabs: By Size, Percentage, Social Media)
-- **Crop Tool** - Requires Fabric.js integration for free-form selection
-- **Compress Tool UI** - Needs quality slider and preview panel
-- **Convert Tool UI** - Needs advanced options and format selector
-
-## 🔑 Cloud Storage Setup (Optional)
-
-1. Create `.env` file from template:
-```bash
-cp .env.example .env
-```
-
-2. Add your API keys to `.env`:
-```env
-DROPBOX_APP_KEY=your_key_here
-GOOGLE_CLIENT_ID=your_client_id_here
-```
-
-3. See `IMPLEMENTATION_GUIDE.md` for detailed instructions
+Optional (installed if available):
+- **numpy** - Enhanced image processing performance
 
 ## 📁 Project Structure
 
 ```
-Image Conversion/
-├── app.py                    # Flask application
-├── requirements.txt          # Dependencies
+ImageForge/
+├── app.py                    # Main Flask application
+├── requirements.txt          # Python dependencies
 ├── README.md                 # This file
-├── IMPLEMENTATION_GUIDE.md   # Detailed implementation guide
-├── .env.example              # Environment variables template
+├── .gitignore               # Git ignore rules
 ├── static/
-│   ├── css/
-│   │   ├── main.css         # Homepage styles (✅)
-│   │   └── [tools].css      # Tool-specific styles
-│   └── js/
-│       ├── main.js          # Homepage logic (✅)
-│       └── [tools].js       # Tool-specific scripts
-├── templates/
-│   ├── index.html           # New homepage (✅)
-│   └── [tools].html         # Tool pages
-└── uploads/                 # Temporary storage
+│   ├── css/                 # Stylesheets for each tool
+│   │   ├── main.css
+│   │   ├── converter.css
+│   │   ├── resizer.css
+│   │   ├── compressor.css
+│   │   ├── cropper.css
+│   │   └── canva.css
+│   ├── js/                  # JavaScript for each tool
+│   │   ├── loading.js       # Loading modal system
+│   │   ├── converter.js
+│   │   ├── resizer.js
+│   │   ├── compressor.js
+│   │   ├── cropper.js
+│   │   └── canva.js
+│   └── assets/              # Images and icons
+├── templates/               # HTML templates
+│   ├── index.html          # Homepage
+│   ├── converter.html
+│   ├── resizer.html
+│   ├── compressor.html
+│   ├── cropper.html
+│   └── canva.html
+├── uploads/                 # Temporary upload storage (auto-created)
+├── converted/              # Processed files (auto-created)
+└── venv/                   # Virtual environment (not committed)
 ```
 
-## 🛠️ Technologies
+## 🛠️ Tool Features
 
-- **Backend**: Flask 3.0.3, Pillow 10.3.0
-- **Frontend**: Vanilla JavaScript, CSS3
-- **Canvas**: Fabric.js (for crop tool)
-- **Image Processing**: PIL/Pillow
-- **Optional**: Real-ESRGAN (AI upscaling)
+### Image Converter
+- Convert between 9 formats: PNG, JPG, WebP, PDF, GIF, HEIC, BMP, TIFF, ICO
+- Rotate images (90°, 180°, 270°)
+- Adjust quality for lossy formats
+- Bulk conversion support
+- Maintains EXIF data where possible
 
-## 📖 Documentation
+### Image Resizer
+- Resize by exact dimensions (width × height)
+- Resize by percentage
+- Social media presets (Instagram, Facebook, Twitter, etc.)
+- Maintain or customize aspect ratio
+- Format conversion during resize
 
-- **IMPLEMENTATION_GUIDE.md** - Complete implementation details
-- **Screenshots** - UI reference provided
-- **API Docs** - See Flask routes in `app.py`
+### Image Compressor
+- Quality-based compression (1-100%)
+- Target file size compression (auto-adjust quality)
+- Before/after comparison slider
+- Real-time file size preview
+- Multiple format support
+
+### Image Cropper
+- Interactive crop area selection
+- Aspect ratio presets (Square, 16:9, 4:3, etc.)
+- Custom aspect ratios
+- Preview before crop
+- Download in multiple formats
+
+### Background Remover
+- AI-powered background removal
+- Design canvas editor
+- Add text, shapes, and filters
+- Layer management
+- Export as PNG or JPG
+
+### QR Code Generator
+- URL, text, contact, WiFi, email QR codes
+- Customizable colors and size
+- Logo/icon embedding
+- Multiple export formats
+
+## 🌐 Deployment
+
+### Local Development
+Already covered in Quick Start above.
+
+### Production Deployment
+
+**Important**: Flask's built-in server is for development only. For production, use:
+
+#### Option 1: Gunicorn (Linux/macOS)
+```bash
+pip install gunicorn
+gunicorn -w 4 -b 0.0.0.0:5004 app:app
+```
+
+#### Option 2: Waitress (Windows/Cross-platform)
+```bash
+pip install waitress
+waitress-serve --port=5004 app:app
+```
+
+#### Option 3: Docker
+```bash
+# Create Dockerfile
+docker build -t imageforge .
+docker run -p 5004:5004 imageforge
+```
+
+### Environment Variables (Optional)
+Create `.env` file for custom configuration:
+```env
+FLASK_ENV=production
+SECRET_KEY=your-secret-key-here
+MAX_CONTENT_LENGTH=10485760  # 10MB
+PORT=5004
+```
+
+## 🔒 Security Notes
+
+- Maximum file size: 10MB (configurable in `app.py`)
+- Uploaded files are temporarily stored and auto-cleaned
+- No data is sent to external servers (except rembg AI model download on first use)
+- CSRF protection recommended for production
+- Consider adding rate limiting for public deployments
+
+## 🐛 Troubleshooting
+
+### Port Already in Use
+```bash
+# Find and kill process on port 5004
+lsof -ti:5004 | xargs kill -9
+```
+
+### PIL/Pillow Issues
+```bash
+pip uninstall Pillow
+pip install Pillow --no-cache-dir
+```
+
+### rembg Model Download
+First background removal will download AI model (~176MB). Requires internet connection once.
+
+### Virtual Environment Not Activating
+```bash
+# Ensure you're in the project directory
+cd path/to/ezconvert
+
+# Recreate venv
+rm -rf venv
+python3 -m venv venv
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate      # Windows
+```
+
+## � Browser Compatibility
+
+- ✅ Chrome 90+
+- ✅ Firefox 88+
+- ✅ Safari 14+
+- ✅ Edge 90+
+- ✅ Mobile browsers (iOS Safari, Chrome Mobile)
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to branch (`git push origin feature/AmazingFeature`)
+5. Open Pull Request
+
+## � License
+
+This project is open source and available under the MIT License.
+
+## 👨‍💻 Author
+
+**Achyuth**
+- GitHub: [@achyuth8055](https://github.com/achyuth8055)
+- Repository: [ezconvert](https://github.com/achyuth8055/ezconvert)
+
+## 🙏 Acknowledgments
+
+- PIL/Pillow for image processing
+- rembg for AI background removal
+- ReportLab for PDF generation
+- Flask framework and community
 
 ## 🎨 Design
 

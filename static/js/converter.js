@@ -338,6 +338,7 @@ function rotateImage(degrees) {
 // ====================================
 function updateQualityVisibility() {
   const lossyFormats = ['jpg', 'jpeg', 'webp'];
+  const formatsThatIgnoreQuality = ['pdf', 'bmp', 'png', 'gif', 'tiff', 'ico'];
   
   if (lossyFormats.includes(state.targetFormat)) {
     elements.qualityGroup.style.display = 'block';
@@ -356,7 +357,12 @@ async function handleConvert() {
   }
   
   // Show loading state
-  const overlay = showLoadingOverlay(state.isBulkMode ? `Converting ${state.originalFiles.length} images...` : 'Converting image...');
+  LoadingModal.show(
+    state.isBulkMode ? 'Converting Images' : 'Converting Image', 
+    state.isBulkMode ? `Processing ${state.originalFiles.length} images...` : 'Please wait while we convert your image'
+  );
+  const progressTimer = LoadingModal.simulateProgress(3000);
+  
   elements.btnConvert.disabled = true;
   elements.btnConvert.innerHTML = `
     <span class="spinner"></span>
@@ -397,10 +403,9 @@ async function handleConvert() {
       const successItems = result.items.filter(item => item.status === 'success');
       
       if (successItems.length > 0) {
-        // Success - trigger download
-        updateLoadingMessage(overlay, '✓ Conversion complete!');
         // Success - trigger downloads
-        updateLoadingMessage(overlay, `✓ ${successItems.length} file(s) converted!`);
+        LoadingModal.updateMessage(`✓ ${successItems.length} file(s) converted!`);
+        LoadingModal.updateProgress(100);
         await sleep(500);
         
         // Download all successful files
@@ -409,9 +414,8 @@ async function handleConvert() {
           await sleep(300); // Small delay between downloads
         }
         
-        // Show success message and rating modal
-        await sleep(1000);
-        hideLoadingOverlay(overlay);
+        // Hide loading and show success
+        await LoadingModal.hide();
         NotificationModal.success(`Successfully converted ${successItems.length} file(s)!`);
         
         // Show rating modal after download
@@ -425,7 +429,7 @@ async function handleConvert() {
     
   } catch (error) {
     console.error('Conversion error:', error);
-    hideLoadingOverlay(overlay);
+    await LoadingModal.hide();
     NotificationModal.error(`Conversion failed: ${error.message}`);
   } finally {
     // Re-enable convert button
@@ -440,6 +444,13 @@ async function handleConvert() {
 }
 
 // ====================================
+// Utility Functions
+// ====================================
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+// ====================================
 // Download
 // ====================================
 function downloadFile(url, filename) {
@@ -449,45 +460,6 @@ function downloadFile(url, filename) {
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-}
-
-// ====================================
-// Loading Overlay
-// ====================================
-function showLoadingOverlay(message = 'Processing...') {
-  const overlay = document.createElement('div');
-  overlay.className = 'processing-overlay';
-  overlay.innerHTML = `
-    <div class="processing-modal">
-      <div class="spinner large"></div>
-      <h3 class="title">Converting Image</h3>
-      <p class="message">${message}</p>
-    </div>
-  `;
-  document.body.appendChild(overlay);
-  return overlay;
-}
-
-function hideLoadingOverlay(overlay) {
-  if (overlay && overlay.parentNode) {
-    overlay.style.opacity = '0';
-    setTimeout(() => {
-      overlay.remove();
-    }, 300);
-  }
-}
-
-function updateLoadingMessage(overlay, message) {
-  if (overlay) {
-    const messageEl = overlay.querySelector('.message');
-    if (messageEl) {
-      messageEl.textContent = message;
-    }
-  }
-}
-
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 // ====================================

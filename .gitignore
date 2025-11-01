@@ -1,3 +1,10 @@
+# User uploaded files and generated content
+uploads/
+converted/
+feedback/
+static/out/
+Sample Images/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

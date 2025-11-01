@@ -116,9 +116,75 @@ a {
 }
 
 .container {
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 24px;
+}
+
+/* Enhanced upload hero */
+.upload-hero {
+    padding: 48px 24px 32px;
+    text-align: center;
+}
+
+.upload-hero h1 {
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.5px;
+}
+
+.upload-hero .subtitle {
+    font-size: 18px;
+    color: var(--muted);
+    margin: 0;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Features grid improvements */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 32px;
+    margin-top: 56px;
+    padding: 0 16px;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 28px 20px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    border-color: var(--accent);
+}
+
+.feature-item svg {
+    color: var(--accent);
+    margin-bottom: 20px;
+}
+
+.feature-item h3 {
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 10px;
+}
+
+.feature-item p {
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.6;
 }
 
 /* Editor Layout */
