@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback - EzImage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/feedback.css') }}">
+</head>
+<body>
+    <nav class="nav">
+        <div class="wrap">
+            <a href="/" class="logo">
+                <div class="logo-grid">
+                    <div class="logo-square"></div>
+                    <div class="logo-square"></div>
+                    <div class="logo-square"></div>
+                    <div class="logo-square"></div>
+                </div>
+                <span>EzImage</span>
+            </a>
+            <div class="nav-links">
+                <div class="nav-dropdown">
+                    <a href="#" class="link">Resize <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/resizer">Image Resizer</a>
+                        <a href="/resizer/bulk">Bulk Resize</a>
+                        <a href="/resizer/png">Resize PNG</a>
+                        <a href="/resizer/jpg">Resize JPG</a>
+                        <a href="/resizer/webp">Resize WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">Crop <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/cropper">Crop Image</a>
+                        <a href="/cropper/png">Crop PNG</a>
+                        <a href="/cropper/jpg">Crop JPG</a>
+                        <a href="/cropper/webp">Crop WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">Compress <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/compressor">Image Compressor</a>
+                        <a href="/compressor/jpeg">JPEG Compressor</a>
+                        <a href="/compressor/png">PNG Compressor</a>
+                        <a href="/compressor/gif">GIF Compressor</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">Convert <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/converter">Image Converter</a>
+                        <a href="/converter/svg">SVG Converter</a>
+                        <a href="/converter/png">PNG Converter</a>
+                        <a href="/converter/jpg">JPG Converter</a>
+                        <a href="/converter/gif">GIF Converter</a>
+                        <a href="/converter/heic-to-jpg">HEIC to JPG</a>
+                        <a href="/converter/webp-to-png">WebP to PNG</a>
+                        <a href="/converter/webp-to-jpg">WebP to JPG</a>
+                        <a href="/converter/png-to-jpg">PNG to JPG</a>
+                        <a href="/converter/png-to-svg">PNG to SVG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">More <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/meme-generator">Meme Generator</a>
+                        <a href="/color-picker">Color Picker</a>
+                        <a href="/rotate-image">Rotate Image</a>
+                        <a href="/flip-image">Flip Image</a>
+                        <a href="/image-enlarger">Image Enlarger</a>
+                        <a href="/qr-generator">QR Code Generator</a>
+                    </div>
+                </div>
+                <a href="/donate" class="link plain">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="feedback-container">
+        <div class="feedback-header">
+            <h1>Send Us Your Feedback</h1>
+            <p>We'd love to hear your thoughts, suggestions, or concerns about EzImage.</p>
+        </div>
+
+        <div class="feedback-form-wrapper">
+            <form id="feedbackForm" class="feedback-form">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="your@email.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category</label>
+                    <select id="category" name="category" required>
+                        <option value="">Select a category</option>
+                        <option value="bug">Bug Report</option>
+                        <option value="suggestion">Suggestion</option>
+                        <option value="praise">Praise</option>
+                        <option value="question">Question</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="6" placeholder="Tell us what you think..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn-submit">Send Feedback</button>
+            </form>
+
+            <div id="successMessage" class="success-message">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M9 12l2 2 4-4"/>
+                </svg>
+                <h3>Thank you for your feedback!</h3>
+                <p>We appreciate you taking the time to share your thoughts with us.</p>
+                <button onclick="window.close()" class="btn-close">Close Window</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/feedback.js') }}"></script>
+</body>
+</html>

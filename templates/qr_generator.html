@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code Generator - ImageForge</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shared_upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/qr_generator.css') }}">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <a href="/" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg class="logo" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                    </svg>
+                   <span class="name" style="text-decoration: none; color: inherit;">EzImage</span>
+                </a>
+            </div>
+            <div class="menu">
+                <div class="nav-dropdown">
+                    <a href="/resizer" class="link">Resize <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/resizer">Image Resizer</a>
+                        <a href="/resizer/bulk">Bulk Resize</a>
+                        <a href="/resizer/png">Resize PNG</a>
+                        <a href="/resizer/jpg">Resize JPG</a>
+                        <a href="/resizer/webp">Resize WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/cropper" class="link">Crop <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/cropper">Crop Image</a>
+                        <a href="/cropper/png">Crop PNG</a>
+                        <a href="/cropper/webp">Crop WebP</a>
+                        <a href="/cropper/jpg">Crop JPG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/compressor" class="link">Compress <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/compressor">Image Compressor</a>
+                        <a href="/compressor/jpeg">Compress JPEG</a>
+                        <a href="/compressor/png">PNG Compressor</a>
+                        <a href="/compressor/gif">GIF Compressor</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/converter" class="link">Convert <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/converter">Image Converter</a>
+                        <a href="/converter/svg">SVG Converter</a>
+                        <a href="/converter/png">PNG Converter</a>
+                        <a href="/converter/jpg">JPG Converter</a>
+                        <a href="/converter/gif">GIF Converter</a>
+                        <a href="/converter/heic-to-jpg">HEIC to JPG</a>
+                        <a href="/converter/webp-to-png">WebP to PNG</a>
+                        <a href="/converter/webp-to-jpg">WebP to JPG</a>
+                        <a href="/converter/png-to-jpg">PNG to JPG</a>
+                        <a href="/converter/png-to-svg">PNG to SVG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">More <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/background-remover">Background Remover</a>
+                        <a href="/meme-generator">Meme Generator</a>
+                        <a href="/color-picker">Color Picker</a>
+                        <a href="/rotate-image">Rotate Image</a>
+                        <a href="/flip-image">Flip Image</a>
+                        <a href="/image-enlarger">Image Enlarger</a>
+                        <a href="/qr-generator">QR Code Generator</a>
+                    </div>
+                </div>
+                <a href="/donate" class="link plain">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="qr-container">
+        <!-- Breadcrumb -->
+        <div class="breadcrumb">
+            <a href="/" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">QR Code Generator</span>
+        </div>
+
+        <!-- Hero -->
+        <div class="qr-hero">
+            <h1>QR Code Generator</h1>
+            <p class="subtitle">Create custom QR codes for URLs, text, and more</p>
+        </div>
+
+        <!-- QR Generator Layout -->
+        <div class="qr-layout">
+            <!-- Left Sidebar - Controls -->
+            <div class="qr-sidebar">
+                <div class="control-section">
+                    <h3 class="section-title">Content</h3>
+                    
+                    <div class="form-group">
+                        <label>Content Type</label>
+                        <select id="contentType" class="select-field">
+                            <option value="url">Website URL</option>
+                            <option value="text">Plain Text</option>
+                            <option value="email">Email</option>
+                            <option value="phone">Phone Number</option>
+                            <option value="sms">SMS</option>
+                            <option value="wifi">WiFi</option>
+                        </select>
+                    </div>
+
+                    <!-- URL Input -->
+                    <div class="form-group" id="urlInput">
+                        <label>Website URL</label>
+                        <input type="url" id="qrUrl" class="input-field" placeholder="https://example.com">
+                    </div>
+
+                    <!-- Text Input -->
+                    <div class="form-group" id="textInput" style="display: none;">
+                        <label>Text</label>
+                        <textarea id="qrText" class="textarea-field" rows="4" placeholder="Enter your text here"></textarea>
+                    </div>
+
+                    <!-- Email Input -->
+                    <div class="form-group" id="emailInput" style="display: none;">
+                        <label>Email Address</label>
+                        <input type="email" id="qrEmail" class="input-field" placeholder="email@example.com">
+                        <label style="margin-top: 12px;">Subject</label>
+                        <input type="text" id="qrEmailSubject" class="input-field" placeholder="Email subject">
+                        <label style="margin-top: 12px;">Message</label>
+                        <textarea id="qrEmailBody" class="textarea-field" rows="3" placeholder="Email message"></textarea>
+                    </div>
+
+                    <!-- Phone Input -->
+                    <div class="form-group" id="phoneInput" style="display: none;">
+                        <label>Phone Number</label>
+                        <input type="tel" id="qrPhone" class="input-field" placeholder="+1234567890">
+                    </div>
+
+                    <!-- SMS Input -->
+                    <div class="form-group" id="smsInput" style="display: none;">
+                        <label>Phone Number</label>
+                        <input type="tel" id="qrSmsPhone" class="input-field" placeholder="+1234567890">
+                        <label style="margin-top: 12px;">Message</label>
+                        <textarea id="qrSmsMessage" class="textarea-field" rows="3" placeholder="SMS message"></textarea>
+                    </div>
+
+                    <!-- WiFi Input -->
+                    <div class="form-group" id="wifiInput" style="display: none;">
+                        <label>Network Name (SSID)</label>
+                        <input type="text" id="qrWifiSsid" class="input-field" placeholder="MyWiFi">
+                        <label style="margin-top: 12px;">Password</label>
+                        <input type="text" id="qrWifiPassword" class="input-field" placeholder="password123">
+                        <label style="margin-top: 12px;">Security Type</label>
+                        <select id="qrWifiSecurity" class="select-field">
+                            <option value="WPA">WPA/WPA2</option>
+                            <option value="WEP">WEP</option>
+                            <option value="nopass">None</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="control-section">
+                    <h3 class="section-title">Customization</h3>
+                    
+                    <div class="form-group">
+                        <label>Size (pixels)</label>
+                        <input type="number" id="qrSize" class="input-field" value="256" min="128" max="1024" step="32">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Foreground Color</label>
+                        <div class="color-picker-group">
+                            <input type="color" id="qrFgColor" class="color-input" value="#000000">
+                            <input type="text" id="qrFgColorText" class="input-field" value="#000000" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Background Color</label>
+                        <div class="color-picker-group">
+                            <input type="color" id="qrBgColor" class="color-input" value="#ffffff">
+                            <input type="text" id="qrBgColorText" class="input-field" value="#ffffff" readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Error Correction</label>
+                        <select id="qrErrorCorrection" class="select-field">
+                            <option value="L">Low (7%)</option>
+                            <option value="M" selected>Medium (15%)</option>
+                            <option value="Q">Quartile (25%)</option>
+                            <option value="H">High (30%)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button class="btn-generate" id="generateBtn">
+                    Generate QR Code
+                </button>
+
+                <button class="btn-download" id="downloadBtn" style="display: none;">
+                    Download QR Code
+                </button>
+            </div>
+
+            <!-- Right Side - Preview -->
+            <div class="qr-preview">
+                <div class="preview-container">
+                    <div class="preview-placeholder" id="previewPlaceholder">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <rect x="3" y="3" width="7" height="7" rx="1"/>
+                            <rect x="14" y="3" width="7" height="7" rx="1"/>
+                            <rect x="3" y="14" width="7" height="7" rx="1"/>
+                            <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            <circle cx="6.5" cy="6.5" r="1" fill="currentColor"/>
+                            <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+                            <circle cx="6.5" cy="17.5" r="1" fill="currentColor"/>
+                            <circle cx="17.5" cy="17.5" r="1" fill="currentColor"/>
+                        </svg>
+                        <p>Enter content and click Generate</p>
+                    </div>
+                    <div id="qrCodeContainer" style="display: none;"></div>
+                </div>
+
+                <div class="preview-info" id="previewInfo" style="display: none;">
+                    <div class="info-row">
+                        <span class="info-label">Size:</span>
+                        <span class="info-value" id="qrSizeInfo">--</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Format:</span>
+                        <span class="info-value">PNG</span>
+                    </div>
+                    <div class="info-row">
+                        <span class="info-label">Error Correction:</span>
+                        <span class="info-value" id="qrEcInfo">--</span>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="features">
+                    <div class="feature-item">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                        </svg>
+                        <h4>High Quality</h4>
+                        <p>Generate high-resolution QR codes</p>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"/>
+                            <path d="M12 1v6m0 6v6M1 12h6m6 0h6"/>
+                        </svg>
+                        <h4>Customizable</h4>
+                        <p>Choose colors and error correction</p>
+                    </div>
+                    <div class="feature-item">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="20 6 9 17 4 12"/>
+                        </svg>
+                        <h4>Multiple Types</h4>
+                        <p>URL, text, email, WiFi, and more</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/feedback" target="_blank" class="footer-link">Send Feedback</a>
+                <span class="footer-separator">•</span>
+                <a href="/request-feature" target="_blank" class="footer-link">Request a Feature</a>
+            </div>
+            <p class="footer-text">&copy; 2025 EzImage. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="loading-modal">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 class="loading-title" id="loadingTitle">Generating QR Code...</h3>
+            <p class="loading-message" id="loadingMessage">Please wait while we create your QR code</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+            <p class="progress-text" id="progressText">0%</p>
+        </div>
+    </div>
+
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/qr_generator.js') }}"></script>
+</body>
+</html>

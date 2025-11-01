@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Free Image Compressor - Compress JPG, PNG & WebP Online | Reduce File Size</title>
+    
+    <meta name="description" content="Compress images online for free! Reduce JPG, PNG, and WebP file sizes up to 80% while maintaining quality. Perfect for web optimization. Batch compression available.">
+    
+    <meta name="keywords" content="image compressor, compress image, reduce image size, compress jpg, compress png, compress webp, image optimizer, reduce file size, optimize images for web, shrink image file, photo compressor, picture compressor, image size reducer, lossy compression, lossless compression">
+    
+    <link rel="canonical" href="https://www.imageforge.com/compressor">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.imageforge.com/compressor">
+    <meta property="og:title" content="Free Image Compressor - Reduce Image File Size | ImageForge">
+    <meta property="og:description" content="Compress images online while maintaining quality. Reduce file sizes for faster web loading.">
+    <meta property="og:image" content="https://www.imageforge.com/static/assets/compressor-og.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Image Compressor - Reduce Image Size">
+    <meta name="twitter:description" content="Compress images online for free. Reduce file sizes up to 80%.">
+    
+    <meta name="robots" content="index, follow">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shared_upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/compressor.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}">
+</head>
+<body>
+    <nav class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <a href="/" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg class="logo" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                    </svg>
+                   <span class="name" style="text-decoration: none; color: inherit;">EzImage</span>
+                </a>
+            </div>
+            <div class="menu">
+                <div class="nav-dropdown">
+                    <a href="/resizer" class="link">Resize <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/resizer">Image Resizer</a>
+                        <a href="/resizer/bulk">Bulk Resize</a>
+                        <a href="/resizer/png">Resize PNG</a>
+                        <a href="/resizer/jpg">Resize JPG</a>
+                        <a href="/resizer/webp">Resize WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/cropper" class="link">Crop <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/cropper">Crop Image</a>
+                        <a href="/cropper/png">Crop PNG</a>
+                        <a href="/cropper/webp">Crop WebP</a>
+                        <a href="/cropper/jpg">Crop JPG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/compressor" class="link">Compress <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/compressor">Image Compressor</a>
+                        <a href="/compressor/jpeg">Compress JPEG</a>
+                        <a href="/compressor/png">PNG Compressor</a>
+                        <a href="/compressor/gif">GIF Compressor</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/converter" class="link">Convert <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/converter">Image Converter</a>
+                        <a href="/converter/svg">SVG Converter</a>
+                        <a href="/converter/png">PNG Converter</a>
+                        <a href="/converter/jpg">JPG Converter</a>
+                        <a href="/converter/gif">GIF Converter</a>
+                        <a href="/converter/heic-to-jpg">HEIC to JPG</a>
+                        <a href="/converter/webp-to-png">WebP to PNG</a>
+                        <a href="/converter/webp-to-jpg">WebP to JPG</a>
+                        <a href="/converter/png-to-jpg">PNG to JPG</a>
+                        <a href="/converter/png-to-svg">PNG to SVG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">More <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/background-remover">Background Remover</a>
+                        <a href="/meme-generator">Meme Generator</a>
+                        <a href="/color-picker">Color Picker</a>
+                        <a href="/rotate-image">Rotate Image</a>
+                        <a href="/flip-image">Flip Image</a>
+                        <a href="/image-enlarger">Image Enlarger</a>
+                        <a href="/qr-generator">QR Code Generator</a>
+                    </div>
+                </div>
+                <a href="/donate" class="link plain">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="compress-upload">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="/" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">›</span>
+                <span class="breadcrumb-current">Compress Image</span>
+            </div>
+        </div>
+
+        <div class="upload-hero">
+            <h1>Compress Image</h1>
+            <p class="subtitle">Reduce file size while maintaining quality</p>
+        </div>
+
+        <div class="upload-container container">
+            <div class="dropzone" id="dropzone">
+                <div class="dropzone-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                <div class="upload-dropdown">
+                    <button class="btn-select">
+                        <span>Select Image</span>
+                        <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu">
+                        <button class="dropdown-item" id="fromDevice">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                            <span>From Device</span>
+                        </button>
+                        <button class="dropdown-item" id="fromDropbox">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0061FF" stroke="none">
+                                <path d="M6 2L0 6l6 4 6-4-6-4zm0 16l-6-4 6-4 6 4-6 4zm6-8l6 4-6 4-6-4 6-4zm6-8l-6 4 6 4 6-4-6-4z"/>
+                            </svg>
+                            <span>Dropbox</span>
+                        </button>
+                        <button class="dropdown-item" id="fromGoogleDrive">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <path d="M8 2L2 14h6l6-12H8z" fill="#0066DA"/>
+                                <path d="M16 2l6 12h-6L10 2h6z" fill="#00AC47"/>
+                                <path d="M2 14l3 6h14l3-6H2z" fill="#EA4335"/>
+                            </svg>
+                            <span>Google Drive</span>
+                        </button>
+                        <button class="dropdown-item" id="fromOneDrive">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#0078D4" stroke="none">
+                                <path d="M22.5 13.5c0-2.5-2-4.5-4.5-4.5-0.3 0-0.6 0-0.9 0.1C16.2 6.7 14.3 5 12 5c-3 0-5.5 2.3-5.9 5.3C3.5 10.8 1.5 13 1.5 15.5 1.5 18.5 4 21 7 21h13c2.2 0 4-1.8 4-4 0-2-1.5-3.7-3.5-4z"/>
+                            </svg>
+                            <span>OneDrive</span>
+                        </button>
+                        <button class="dropdown-item" id="fromURL">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+                            </svg>
+                            <span>From URL</span>
+                        </button>
+                    </div>
+                </div>
+                <p class="drop-text">or, drag and drop an image here</p>
+                <p class="drop-text-small">Max file size: 10 MB.</p>
+                <input type="file" id="fileInput" accept="image/*" hidden>
+            </div>
+
+            <div class="features">
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <h3>Fast Compression</h3>
+                    <p>Compress your images in seconds with our optimized algorithms</p>
+                </div>
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+                    </svg>
+                    <h3>Quality Control</h3>
+                    <p>Adjust compression level to balance file size and image quality</p>
+                </div>
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7 10 12 15 17 10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                    </svg>
+                    <h3>Multiple Formats</h3>
+                    <p>Supports JPEG, PNG, WebP, and GIF compression</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="compress-editor" style="display: none;">
+        <div class="editor-sidebar">
+            <div class="image-preview">
+                <img id="thumbnailImg" src="" alt="Preview">
+                <div class="compression-badge" id="compressionBadge">--%</div>
+            </div>
+
+            <div class="control-section">
+                <h3 class="section-title">Compression Settings</h3>
+                
+                <div class="form-group">
+                    <label>Quality</label>
+                    <div class="slider-container">
+                        <input type="range" id="qualitySlider" min="1" max="100" value="85" class="slider">
+                        <div class="slider-value" id="qualityValue">85%</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" id="maxSizeToggle" class="checkbox">
+                        <span>Compress to Specific Size</span>
+                    </label>
+                </div>
+
+                <div class="form-group max-size-controls" id="maxSizeControls" style="display: none;">
+                    <label>Target File Size</label>
+                    <div class="size-input-group">
+                        <input type="number" id="maxSizeInput" class="input-field" value="100" min="1" placeholder="Enter size">
+                        <select id="sizeUnitSelect" class="select-field">
+                            <option value="kb" selected>KB</option>
+                            <option value="mb">MB</option>
+                        </select>
+                    </div>
+                    <p class="size-hint">Image will be compressed to approximately this size</p>
+                </div>
+
+                <div class="form-group">
+                    <label>Output Format</label>
+                    <select id="formatSelect" class="select-field">
+                        <option value="original">Keep Original</option>
+                        <option value="jpg">JPEG</option>
+                        <option value="png">PNG</option>
+                        <option value="webp">WebP</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="file-info-section">
+                <h3 class="section-title">File Information</h3>
+                <div class="info-row">
+                    <span class="info-label">Original Size:</span>
+                    <span class="info-value" id="originalSize">--</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Compressed Size:</span>
+                    <span class="info-value" id="compressedSize">--</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Dimensions:</span>
+                    <span class="info-value" id="imageDimensions">--</span>
+                </div>
+            </div>
+
+            <button class="btn-compress" id="compressBtn">
+                Compress Image →
+            </button>
+
+            <button class="btn-new" id="newImageBtn">
+                Upload Another Image
+            </button>
+        </div>
+
+        <div class="editor-preview">
+            <div class="preview-controls">
+                <div class="preview-info">
+                    <span class="preview-label">Before & After Comparison</span>
+                </div>
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomOut">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="8" y1="11" x2="14" y2="11"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </button>
+                    <span class="zoom-level" id="zoomLevel">100%</span>
+                    <button class="zoom-btn" id="zoomIn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <line x1="11" y1="8" x2="11" y2="14"/>
+                            <line x1="8" y1="11" x2="14" y2="11"/>
+                            <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                        </svg>
+                    </button>
+                    <button class="zoom-btn" id="fitScreen">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="comparison-container" id="comparisonContainer">
+                <div class="comparison-view" id="comparisonView">
+                    <div class="comparison-side before-side">
+                        <img id="originalImage" src="" alt="Original">
+                        <div class="comparison-label">Before</div>
+                    </div>
+                    <div class="comparison-side after-side" id="afterSide" style="display: none;">
+                        <img id="compressedImage" src="" alt="Compressed">
+                        <div class="comparison-label">After</div>
+                    </div>
+                    <div class="comparison-slider" id="comparisonSlider" style="display: none;">
+                        <div class="slider-handle">
+                            <div class="slider-line"></div>
+                            <div class="slider-button">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="15 18 9 12 15 6"/>
+                                    <polyline points="9 18 15 12 9 6"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-hint" id="comparisonHint" style="display: none;">
+                    <span>← Drag the slider to compare →</span>
+                </div>
+            </div>
+
+            <button class="btn-download" id="downloadBtn" style="display: none;">
+                Download Compressed Image
+            </button>
+        </div>
+    </div>
+
+    <div class="modal" id="urlModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h3>Load Image from URL</h3>
+            <input type="url" id="urlInput" class="input-field" placeholder="https://example.com/image.jpg">
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancelURL">Cancel</button>
+                <button class="btn-primary" id="loadURL">Load Image</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/feedback" target="_blank" class="footer-link">Send Feedback</a>
+                <span class="footer-separator">•</span>
+                <a href="/request-feature" target="_blank" class="footer-link">Request a Feature</a>
+            </div>
+            <p class="footer-text">&copy; 2025 EzImage. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="loading-modal">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 class="loading-title" id="loadingTitle">Uploading Images...</h3>
+            <p class="loading-message" id="loadingMessage">Please wait while we process your files</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+            <p class="progress-text" id="progressText">0%</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/compressor.js') }}"></script>
+</body>
+</html>

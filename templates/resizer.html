@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Free Image Resizer Online - Resize Photos & Pictures | Pix Resize Tool</title>
+    
+    <meta name="description" content="Resize images online for free! Change photo dimensions by pixels or percentage. Perfect for social media, web, and print. Supports JPG, PNG, WebP. No signup, instant results.">
+    
+    <meta name="keywords" content="image resizer, resize image, resize photo online, pix resize, picture resizer, photo resizer, image dimensions, resize png, resize jpg, resize image online free, bulk image resize, social media image resize, instagram resize, facebook resize, thumbnail creator, shrink image, enlarge image, scale image">
+    
+    <link rel="canonical" href="https://www.imageforge.com/resizer">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.imageforge.com/resizer">
+    <meta property="og:title" content="Free Image Resizer - Resize Photos Online | ImageForge">
+    <meta property="og:description" content="Resize images by pixels or percentage. Perfect for social media, web, and print. Fast and free.">
+    <meta property="og:image" content="https://www.imageforge.com/static/assets/resizer-og.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://www.imageforge.com/resizer">
+    <meta name="twitter:title" content="Free Image Resizer - Pix Resize Tool">
+    <meta name="twitter:description" content="Resize images by pixels or percentage. Perfect for social media sizing.">
+    
+    <meta name="robots" content="index, follow">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shared_upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/resizer.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}">
+</head>
+<body>
+    <nav class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <a href="/" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg class="logo" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                    </svg>
+                   <span class="name" style="text-decoration: none; color: inherit;">ezconvert</span>
+                </a>
+            </div>
+            <div class="menu">
+                <div class="nav-dropdown">
+                    <a href="/resizer" class="link">Resize <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/resizer">Image Resizer</a>
+                        <a href="/resizer/bulk">Bulk Resize</a>
+                        <a href="/resizer/png">Resize PNG</a>
+                        <a href="/resizer/jpg">Resize JPG</a>
+                        <a href="/resizer/webp">Resize WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/cropper" class="link">Crop <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/cropper">Crop Image</a>
+                        <a href="/cropper/png">Crop PNG</a>
+                        <a href="/cropper/webp">Crop WebP</a>
+                        <a href="/cropper/jpg">Crop JPG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/compressor" class="link">Compress <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/compressor">Image Compressor</a>
+                        <a href="/compressor/jpeg">Compress JPEG</a>
+                        <a href="/compressor/png">PNG Compressor</a>
+                        <a href="/compressor/gif">GIF Compressor</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/converter" class="link">Convert <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/converter">Image Converter</a>
+                        <a href="/converter/svg">SVG Converter</a>
+                        <a href="/converter/png">PNG Converter</a>
+                        <a href="/converter/jpg">JPG Converter</a>
+                        <a href="/converter/gif">GIF Converter</a>
+                        <a href="/converter/heic-to-jpg">HEIC to JPG</a>
+                        <a href="/converter/webp-to-png">WebP to PNG</a>
+                        <a href="/converter/webp-to-jpg">WebP to JPG</a>
+                        <a href="/converter/png-to-jpg">PNG to JPG</a>
+                        <a href="/converter/png-to-svg">PNG to SVG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">More <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/background-remover">Background Remover</a>
+                        <a href="/meme-generator">Meme Generator</a>
+                        <a href="/color-picker">Color Picker</a>
+                        <a href="/rotate-image">Rotate Image</a>
+                        <a href="/flip-image">Flip Image</a>
+                        <a href="/image-enlarger">Image Enlarger</a>
+                        <a href="/qr-generator">QR Code Generator</a>
+                    </div>
+                </div>
+                <a href="/donate" class="link plain">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="breadcrumb">
+        <div class="wrap">
+            <a href="/" class="breadcrumb-link">Home</a>
+            <span class="breadcrumb-separator">›</span>
+            <span class="breadcrumb-current">Image Resize</span>
+        </div>
+    </div>
+    <!-- Upload View -->
+    <div id="uploadView" class="resizer-upload">
+        <div class="upload-hero">
+            <h1>Image Resizer</h1>
+            <p class="subtitle">Easily resize images online for free.</p>
+        </div>
+
+        <div class="upload-container">
+            <div class="dropzone" id="dropzone">
+                <div class="dropzone-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                
+                <div class="upload-dropdown">
+                    <button class="btn-select" id="selectBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M8 2v12M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Select Images
+                        <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="uploadMenu">
+                        <button class="dropdown-item" onclick="document.getElementById('fileInput').click()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            From Device
+                        </button>
+                        <button class="dropdown-item" disabled>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#0061FF">
+                                <path d="M8 2L4 6h3v6h2V6h3L8 2z"/>
+                            </svg>
+                            From Dropbox
+                        </button>
+                        <button class="dropdown-item" disabled>
+                            <svg width="16" height="16" viewBox="0 0 16 16">
+                                <path fill="#4285F4" d="M3 3h5v5H3z"/>
+                                <path fill="#34A853" d="M8 3h5v5H8z"/>
+                                <path fill="#FBBC05" d="M3 8h5v5H3z"/>
+                                <path fill="#EA4335" d="M8 8h5v5H8z"/>
+                            </svg>
+                            From Google Drive
+                        </button>
+                        <button class="dropdown-item" disabled>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 2a6 6 0 100 12A6 6 0 008 2zm0 1a5 5 0 110 10A5 5 0 018 3z"/>
+                                <path d="M5.5 6.5L8 9l2.5-2.5" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            From URL
+                        </button>
+                    </div>
+                </div>
+
+                <p class="drop-text">or, drag and drop an image here</p>
+                <p class="drop-text-small">Max file size: 10 MB.</p>
+
+                <input type="file" id="fileInput" accept="image/*" multiple hidden>
+            </div>
+
+            <div class="features">
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="8" width="32" height="32" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 32L16 24L24 32L40 16" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3>Perfect quality</h3>
+                    <p>The best online image resizer to resize your images at the highest quality</p>
+                </div>
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 8L28 20L40 24L28 28L24 40L20 28L8 24L20 20L24 8Z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3>Lightning Fast</h3>
+                    <p>This cloud-hosted, highly scalable tool can resize your images in seconds</p>
+                </div>
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M16 8L32 24L16 40M32 8v32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3>Easy To Use</h3>
+                    <p>Simply upload your image and enter a target size. It's as easy as that</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Editor View -->
+    <div id="editorView" class="resizer-editor" style="display: none;">
+        <div class="editor-toolbar">
+            <button class="toolbar-btn" id="addMoreBtn" title="Add more images">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <button class="toolbar-btn" id="settingsBtn" title="Settings">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                    <path d="M10 2v2m0 12v2M2 10h2m12 0h2m-2.93-5.07l-1.41 1.41M7.34 13.66l-1.41 1.41m9.14 0l-1.41-1.41M7.34 6.34L5.93 4.93" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <button class="toolbar-btn" id="clearAllBtn" title="Clear all">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M5 7h10M8 7V5a1 1 0 011-1h2a1 1 0 011 1v2m-6 3v5m4-5v5M6 7v9a1 1 0 001 1h6a1 1 0 001-1V7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </button>
+            <span class="file-limit">Max file size: 10 MB</span>
+        </div>
+
+        <div class="editor-layout">
+            <div class="editor-sidebar">
+                <h2>Resize Settings</h2>
+
+                <div class="tabs">
+                    <button class="tab active" data-tab="bySize">By Size</button>
+                    <button class="tab" data-tab="asPercentage">As Percentage</button>
+                    <button class="tab" data-tab="socialMedia">Social Media</button>
+                </div>
+
+                <!-- By Size Tab -->
+                <div class="tab-content active" id="bySizeTab">
+                    <div class="form-group">
+                        <label>Width</label>
+                        <input type="number" id="widthInput" placeholder="Enter Width" class="input-field">
+                    </div>
+                    <div class="form-group">
+                        <label>Height</label>
+                        <div class="input-with-unit">
+                            <input type="number" id="heightInput" placeholder="Enter Height" class="input-field">
+                            <select class="unit-select" id="unitSelect">
+                                <option value="px">px</option>
+                                <option value="cm">cm</option>
+                                <option value="in">in</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="lockAspect" checked>
+                        <label for="lockAspect">Lock Aspect Ratio</label>
+                    </div>
+                </div>
+
+                <!-- As Percentage Tab -->
+                <div class="tab-content" id="asPercentageTab">
+                    <div class="form-group">
+                        <label>Resize by Percentage</label>
+                        <input type="number" id="percentageInput" placeholder="100" class="input-field" min="1" max="500" value="100">
+                    </div>
+                    <div class="percentage-info">
+                        <p>Enter a percentage value to scale your image. 100% = original size.</p>
+                    </div>
+                </div>
+
+                <!-- Social Media Tab -->
+                <div class="tab-content" id="socialMediaTab">
+                    <div class="form-group">
+                        <label>Choose the Social Media Platform</label>
+                        <select class="select-field" id="platformSelect">
+                            <option value="facebook">Facebook</option>
+                            <option value="instagram">Instagram</option>
+                            <option value="twitter">Twitter</option>
+                            <option value="youtube">YouTube</option>
+                            <option value="linkedin">LinkedIn</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Preset Type</label>
+                        <select class="select-field" id="presetSelect">
+                            <option value="profile">Profile (170 X 170)</option>
+                            <option value="cover">Cover Photo (820 X 312)</option>
+                            <option value="post">Post (1200 X 630)</option>
+                            <option value="event">Event (1920 X 1080)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Width</label>
+                        <input type="number" id="socialWidthInput" value="170" class="input-field" readonly>
+                    </div>
+                    <div class="form-group">
+                        <label>Height</label>
+                        <input type="number" id="socialHeightInput" value="170" class="input-field" readonly>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="lockSocialAspect" checked>
+                        <label for="lockSocialAspect">Lock Aspect Ratio</label>
+                    </div>
+                    <div class="checkbox-group background-fill">
+                        <input type="checkbox" id="backgroundFill">
+                        <label for="backgroundFill">
+                            Background Fill
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                <path d="M8 6v2m0 2h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            </svg>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Export Settings -->
+                <div class="export-section">
+                    <button class="section-toggle" id="exportToggle">
+                        <span>Export Settings</span>
+                        <svg class="chevron-down" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="export-content" id="exportContent">
+                        <div class="form-group">
+                            <label>Target File Size <span class="optional">(optional)</span></label>
+                            <div class="input-with-unit">
+                                <input type="number" id="targetSize" placeholder="" class="input-field">
+                                <select class="unit-select" id="sizeUnit">
+                                    <option value="kb">KB</option>
+                                    <option value="mb">MB</option>
+                                </select>
+                            </div>
+                            <p class="help-text">Set a max output file size. Only works for JPG files</p>
+                        </div>
+                        <div class="form-group">
+                            <label>Save Image As</label>
+                            <select class="select-field" id="saveFormat">
+                                <option value="original">Keep Original Format</option>
+                                <option value="jpg">JPG</option>
+                                <option value="png">PNG</option>
+                                <option value="webp">WebP</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="btn-export" id="exportBtn">
+                    Export →
+                </button>
+            </div>
+
+            <div class="editor-preview">
+                <div class="preview-container">
+                    <div class="preview-card" id="previewCard">
+                        <div class="preview-controls">
+                            <button class="control-btn" id="downloadBtn" title="Download">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M8 2v8m-3-3l3 3 3-3M3 13h10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <button class="control-btn" id="refreshBtn" title="Refresh">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M2 8a6 6 0 0110.89-3.11M14 8A6 6 0 013.11 11.11M14 4v4h-4M2 12v-4h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <button class="control-btn" id="infoBtn" title="Info">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <path d="M8 8v3m0-5h.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                            <button class="control-btn" id="removeBtn" title="Remove">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="preview-image-wrapper">
+                            <img id="previewImage" src="" alt="Preview">
+                        </div>
+                        <div class="preview-info">
+                            <p class="file-name" id="fileName">IMG_9252.PNG</p>
+                            <div class="size-info">
+                                <span id="originalSize">1179 X 2556</span>
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M3 8h10M10 5l3 3-3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                                <span id="newSize" class="new-size">1179 X 2556</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/resizer.js') }}"></script>
+
+<!-- URL Import Modal -->
+<div class="modal-overlay" id="urlModal" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="urlModalTitle">
+    <div class="modal-header">
+      <h3 id="urlModalTitle">Import from URL</h3>
+      <button class="modal-close" id="closeUrlModal" aria-label="Close">✕</button>
+    </div>
+    <div class="modal-body">
+      <label for="imageUrl" class="modal-label">Image URL</label>
+      <input type="url" id="imageUrl" class="modal-input" placeholder="https://example.com/image.jpg" autocomplete="off">
+      <p class="modal-help">Direct links to JPG, PNG, or WebP work best.</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn ghost" id="cancelUrl">Cancel</button>
+      <button class="btn primary" id="importUrlBtn">Import</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="footer-content">
+        <div class="footer-links">
+            <a href="/feedback" target="_blank" class="footer-link">Send Feedback</a>
+            <span class="footer-separator">•</span>
+            <a href="/request-feature" target="_blank" class="footer-link">Request a Feature</a>
+        </div>
+        <p class="footer-text">&copy; 2025 EzImage. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Loading Modal -->
+<div id="loadingModal" class="loading-modal">
+    <div class="loading-content">
+        <div class="loading-spinner"></div>
+        <h3 class="loading-title" id="loadingTitle">Processing Images...</h3>
+        <p class="loading-message" id="loadingMessage">Please wait while we resize your files</p>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+        </div>
+        <p class="progress-text" id="progressText">0%</p>
+    </div>
+</div>
+
+</body>
+</html>

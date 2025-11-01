@@ -1,0 +1,6 @@
+Flask==3.0.3
+Pillow==10.3.0
+pillow-heif==0.15.0
+reportlab==4.0.7
+# Optional for AI upscaling (requires PyTorch + CUDA/Metal support):
+# realesrgan==0.3.0

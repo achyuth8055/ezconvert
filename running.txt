@@ -1,0 +1,9 @@
+python app.py
+pip install package
+
+./venv/bin/python app.py
+
+
+deactivate
+
+Fabric.js Javascript Library

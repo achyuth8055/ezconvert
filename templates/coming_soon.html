@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ tool_name }} - EzImage</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
+    <style>
+        .coming-soon-container {
+            min-height: calc(100vh - 56px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg);
+            padding: 20px;
+        }
+
+        .coming-soon-content {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .coming-soon-icon {
+            color: var(--accent);
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+
+        .coming-soon-content h1 {
+            font-size: 36px;
+            font-weight: 600;
+            color: var(--text);
+            margin: 0 0 12px;
+        }
+
+        .coming-soon-content h2 {
+            font-size: 24px;
+            font-weight: 500;
+            color: var(--accent);
+            margin: 0 0 16px;
+        }
+
+        .coming-soon-content p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0 0 32px;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 24px;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .back-btn:hover {
+            background: #5a8fe0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(110, 168, 254, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .coming-soon-content h1 {
+                font-size: 28px;
+            }
+
+            .coming-soon-content h2 {
+                font-size: 20px;
+            }
+
+            .coming-soon-content p {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <a href="/" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg class="logo" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                    </svg>
+                   <a href="/" class="name" style="text-decoration: none; color: inherit;">EzImage</a>
+                </a>
+            </div>
+            <div class="menu">
+                <div class="nav-dropdown">
+                    <a href="/resizer" class="link">Resize <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/resizer">Image Resizer</a>
+                        <a href="/resizer/bulk">Bulk Resize</a>
+                        <a href="/resizer/png">Resize PNG</a>
+                        <a href="/resizer/jpg">Resize JPG</a>
+                        <a href="/resizer/webp">Resize WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/cropper" class="link">Crop <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/cropper">Crop Image</a>
+                        <a href="/cropper/png">Crop PNG</a>
+                        <a href="/cropper/webp">Crop WebP</a>
+                        <a href="/cropper/jpg">Crop JPG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/compressor" class="link">Compress <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/compressor">Image Compressor</a>
+                        <a href="/compressor/jpeg">Compress JPEG</a>
+                        <a href="/compressor/png">PNG Compressor</a>
+                        <a href="/compressor/gif">GIF Compressor</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/converter" class="link">Convert <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/converter">Image Converter</a>
+                        <a href="/converter/svg">SVG Converter</a>
+                        <a href="/converter/png">PNG Converter</a>
+                        <a href="/converter/jpg">JPG Converter</a>
+                        <a href="/converter/gif">GIF Converter</a>
+                        <a href="/converter/heic-to-jpg">HEIC to JPG</a>
+                        <a href="/converter/png-to-jpg">PNG to JPG</a>
+                        <a href="/converter/webp-to-jpg">WebP to JPG</a>
+                        <a href="/converter/webp-to-png">WebP to PNG</a>
+                        <a href="/converter/png-to-svg">PNG to SVG</a>
+                        <a href="/converter/batch">Batch Converter</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">More <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/meme-generator">Meme Generator</a>
+                        <a href="/color-picker">Color Picker</a>
+                        <a href="/rotate-image">Rotate Image</a>
+                        <a href="/flip-image">Flip Image</a>
+                        <a href="/image-enlarger">Image Enlarger</a>
+                        <a href="/qr-generator">QR Code Generator</a>
+                    </div>
+                </div>
+                <a href="/donate" class="link plain">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Coming Soon Content -->
+    <div class="coming-soon-container">
+        <div class="coming-soon-content">
+            <svg class="coming-soon-icon" width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            
+            <h2>{{ tool_name }}</h2>
+            <h1>Coming Soon!</h1>
+            <p>We're working hard to bring you this amazing tool. Check back soon for updates!</p>
+            
+            <a href="/" class="back-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M8 2L2 8l6 6M2 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                Back to Home
+            </a>
+        </div>
+    </div>
+</body>
+</html>

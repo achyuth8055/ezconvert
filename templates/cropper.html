@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Free Image Cropper Online - Crop Photos & Pictures with Grid Guide | ImageForge</title>
+    
+    <meta name="description" content="Crop images online for free with precision grid guide! Perfect for social media, profile pictures, and thumbnails. Supports JPG, PNG, WebP. Easy drag-and-resize cropping tool.">
+    
+    <meta name="keywords" content="image cropper, crop image, crop photo online, picture cropper, photo crop tool, crop image online free, square crop, custom crop, aspect ratio crop, trim image, cut image, crop to size, social media crop, profile picture crop">
+    
+    <link rel="canonical" href="https://www.imageforge.com/cropper">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.imageforge.com/cropper">
+    <meta property="og:title" content="Free Image Cropper - Crop Photos Online | ImageForge">
+    <meta property="og:description" content="Crop images with precision using our grid guide tool. Perfect for social media and thumbnails.">
+    <meta property="og:image" content="https://www.imageforge.com/static/assets/cropper-og.png">
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Image Cropper with Grid Guide">
+    <meta name="twitter:description" content="Crop images online with precision. Grid guide for perfect composition.">
+    
+    <meta name="robots" content="index, follow">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/simple.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shared_upload.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cropper.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/notification.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.0/fabric.min.js"></script>
+</head>
+<body>
+    <nav class="nav">
+        <div class="wrap">
+            <div class="brand">
+                <a href="/" style="display: flex; align-items: center; gap: 8px; text-decoration: none;">
+                    <svg class="logo" width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="3" y="3" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                        <rect x="14" y="3" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="3" y="14" width="7" height="7" rx="1" fill="#5b82e6"/>
+                        <rect x="14" y="14" width="7" height="7" rx="1" fill="#6ea8fe"/>
+                    </svg>
+                   <span class="name" style="text-decoration: none; color: inherit;">EzImage</span>
+                </a>
+            </div>
+            <div class="menu">
+                <div class="nav-dropdown">
+                    <a href="/resizer" class="link">Resize <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/resizer">Image Resizer</a>
+                        <a href="/resizer/bulk">Bulk Resize</a>
+                        <a href="/resizer/png">Resize PNG</a>
+                        <a href="/resizer/jpg">Resize JPG</a>
+                        <a href="/resizer/webp">Resize WebP</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/cropper" class="link">Crop <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/cropper">Crop Image</a>
+                        <a href="/cropper/png">Crop PNG</a>
+                        <a href="/cropper/webp">Crop WebP</a>
+                        <a href="/cropper/jpg">Crop JPG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/compressor" class="link">Compress <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/compressor">Image Compressor</a>
+                        <a href="/compressor/jpeg">Compress JPEG</a>
+                        <a href="/compressor/png">PNG Compressor</a>
+                        <a href="/compressor/gif">GIF Compressor</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="/converter" class="link">Convert <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/converter">Image Converter</a>
+                        <a href="/converter/svg">SVG Converter</a>
+                        <a href="/converter/png">PNG Converter</a>
+                        <a href="/converter/jpg">JPG Converter</a>
+                        <a href="/converter/gif">GIF Converter</a>
+                        <a href="/converter/heic-to-jpg">HEIC to JPG</a>
+                        <a href="/converter/webp-to-png">WebP to PNG</a>
+                        <a href="/converter/webp-to-jpg">WebP to JPG</a>
+                        <a href="/converter/png-to-jpg">PNG to JPG</a>
+                        <a href="/converter/png-to-svg">PNG to SVG</a>
+                    </div>
+                </div>
+                <div class="nav-dropdown">
+                    <a href="#" class="link">More <span class="caret">▾</span></a>
+                    <div class="dropdown-content">
+                        <a href="/background-remover">Background Remover</a>
+                        <a href="/meme-generator">Meme Generator</a>
+                        <a href="/color-picker">Color Picker</a>
+                        <a href="/rotate-image">Rotate Image</a>
+                        <a href="/flip-image">Flip Image</a>
+                        <a href="/image-enlarger">Image Enlarger</a>
+                        <a href="/qr-generator">QR Code Generator</a>
+                    </div>
+                </div>
+                <a href="/donate" class="link plain">Donate</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="cropper-upload">
+        <div class="breadcrumb">
+            <div class="wrap">
+                <a href="/" class="breadcrumb-link">Home</a>
+                <span class="breadcrumb-separator">></span>
+                <span class="breadcrumb-current">Crop Image</span>
+            </div>
+        </div>
+
+        <div class="upload-hero">
+            <h1>Crop Image</h1>
+            <p class="subtitle">Quickly crop image files online for free!</p>
+        </div>
+
+        <div class="upload-container">
+            <div class="dropzone" id="dropzone">
+                <div class="dropzone-icon">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="17 8 12 3 7 8"/>
+                        <line x1="12" y1="3" x2="12" y2="15"/>
+                    </svg>
+                </div>
+                
+                <div class="upload-dropdown">
+                    <button class="btn-select" id="selectBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        Select Image
+                        <svg class="chevron" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <div class="dropdown-menu" id="uploadMenu">
+                        <button class="dropdown-item" onclick="document.getElementById('fileInput').click()">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            From Device
+                        </button>
+                        <button class="dropdown-item" id="dropboxBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#0061FF">
+                                <path d="M8 2L4 6h3v6h2V6h3L8 2z"/>
+                            </svg>
+                            From Dropbox
+                        </button>
+                        <button class="dropdown-item" id="googleDriveBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16">
+                                <path fill="#4285F4" d="M3 3h5v5H3z"/>
+                                <path fill="#34A853" d="M8 3h5v5H8z"/>
+                                <path fill="#FBBC05" d="M3 8h5v5H3z"/>
+                                <path fill="#EA4335" d="M8 8h5v5H8z"/>
+                            </svg>
+                            From Google Drive
+                        </button>
+                        <button class="dropdown-item" id="oneDriveBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="#0078D4">
+                                <path d="M12 6a4 4 0 00-7.9-1A3 3 0 106 14h6a4 4 0 000-8z"/>
+                            </svg>
+                            From OneDrive
+                        </button>
+                        <button class="dropdown-item" id="urlBtn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8 2a6 6 0 100 12A6 6 0 008 2zm0 1a5 5 0 110 10A5 5 0 018 3z"/>
+                                <path d="M5.5 6.5L8 9l2.5-2.5" stroke="currentColor" stroke-width="1.5"/>
+                            </svg>
+                            From URL
+                        </button>
+                    </div>
+                </div>
+
+                <p class="drop-text">or, drag and drop an image here</p>
+                <p class="drop-text-small">Max file size: 10 MB.</p>
+
+                <input type="file" id="fileInput" accept="image/*" hidden>
+            </div>
+
+            <div class="features">
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M16 8L32 24L16 40M32 8v32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <h3>Quick and Easy to Use</h3>
+                    <p>Use drag and drop to upload your image or click to select your image. Start cropping.</p>
+                </div>
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="8" width="32" height="32" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 32L16 24L24 32L40 16" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <h3>Crop Image to Any Size</h3>
+                    <p>Crop your image to your desired size. Select aspect ratio or enter custom dimensions.</p>
+                </div>
+                <div class="feature-item">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="10" y="10" width="28" height="28" rx="4" stroke="currentColor" stroke-width="2"/>
+                        <rect x="16" y="16" width="16" height="16" rx="2" fill="currentColor"/>
+                    </svg>
+                    <h3>Crop to Any Aspect Ratio</h3>
+                    <p>Crop your images to different aspect ratios or create custom crop dimensions.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="editorView" class="crop-editor" style="display: none;">
+        <div class="editor-sidebar">
+            <h2>Crop Rectangle</h2>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Width</label>
+                    <input type="number" id="cropWidth" class="input-field" value="940">
+                </div>
+                <div class="form-group">
+                    <label>Height</label>
+                    <input type="number" id="cropHeight" class="input-field" value="2037">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Aspect Ratio</label>
+                <select class="select-field" id="aspectRatio">
+                    <option value="free">FreeForm</option>
+                    <option value="1:1">1:1 (Square)</option>
+                    <option value="16:9">16:9 (Widescreen)</option>
+                    <option value="4:3">4:3 (Standard)</option>
+                    <option value="3:2">3:2 (Classic)</option>
+                    <option value="21:9">21:9 (Ultrawide)</option>
+                    <option value="9:16">9:16 (Portrait)</option>
+                    <option value="3:4">3:4 (Portrait)</option>
+                    <option value="2:3">2:3 (Portrait)</option>
+                </select>
+            </div>
+
+            <h3 class="section-title">Crop Position</h3>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Position (Y)</label>
+                    <input type="number" id="cropY" class="input-field" value="255">
+                </div>
+                <div class="form-group">
+                    <label>Position (X)</label>
+                    <input type="number" id="cropX" class="input-field" value="117">
+                </div>
+            </div>
+
+            <button class="btn-reset" id="resetBtn">Reset</button>
+            <button class="btn-crop" id="cropBtn">Crop →</button>
+        </div>
+
+        <div class="editor-canvas">
+            <div class="canvas-container">
+                <canvas id="cropCanvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div id="urlModal" class="modal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <h3>Enter Image URL</h3>
+            <input type="url" id="imageUrl" class="input-field" placeholder="https://example.com/image.jpg">
+            <div class="modal-actions">
+                <button class="btn-secondary" id="cancelUrlBtn">Cancel</button>
+                <button class="btn-primary" id="loadUrlBtn">Load Image</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="/feedback" target="_blank" class="footer-link">Send Feedback</a>
+                <span class="footer-separator">•</span>
+                <a href="/request-feature" target="_blank" class="footer-link">Request a Feature</a>
+            </div>
+            <p class="footer-text">&copy; 2025 EzImage. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Modal -->
+    <div id="loadingModal" class="loading-modal">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3 class="loading-title" id="loadingTitle">Processing Image...</h3>
+            <p class="loading-message" id="loadingMessage">Please wait while we crop your image</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+            </div>
+            <p class="progress-text" id="progressText">0%</p>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/loading.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/notification.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/cropper.js') }}"></script>
+</body>
+</html>
